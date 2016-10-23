@@ -766,7 +766,7 @@ Le truc important, c'est que la manière de configurer un container est ce qui f
 ---
 class: center, middle
 
-Alors on a continué de chercher...
+Alors on a cherché...
 
 ???
 
@@ -927,15 +927,19 @@ class UniversalWeatherApiServiceProvider implements ServiceProvider
 
 
 ---
+# Dans la pratique
+
+.full-width[![](images/all_modules4.png)]
+
+---
+
+class: center, middle, inverse
+# Demo
 
 
-...
-A partir de là, faire une démo.
-Est-ce que ça marche?
+---
 
-
-
-# Proposition
+# Etendre des services
 
 Une méthode *getServiceExtensions* permet d'étendre les services.
 
@@ -951,11 +955,11 @@ class UniversalWeatherApiServiceProvider implements ServiceProvider
         ];
     }
 
-    public function getServiceExtentions()
+    public function getServiceExtensions()
     {
         return [
-            TwigEngine::class => function(ContainerInterface $container,
-                                          TwigEngine $twig) {
+            Twig_Environment::class => function(ContainerInterface $container,
+                                                Twig_Environment $twig) {
                 $twig->addExtension($container->get(MyTwigExtension::class));
                 return $twig;
             }
@@ -974,6 +978,10 @@ class UniversalWeatherApiServiceProvider implements ServiceProvider
 
 # A propos du nom des services
 
+.full-width[![](images/naming2.png)]
+
+???
+
 Une seule solution:
 
 - Le nom du service devrait correspondre au *Fully Qualified Class Name*
@@ -990,6 +998,31 @@ Avantages:
 
 ---
 
+# Bonus
+## Gestion de la configuration
+
+```php
+class UniversalWeatherApiServiceProvider implements ServiceProvider
+{
+    public function getServices()
+    {
+        return [
+            WeatherApi::class => function(ContainerInterface $container) {
+                return new WeatherApi($container->get(HttpClient::class]),
+                              $container->get(LoggerInterface::class]),
+                              $container->get(CacheItemPoolInterface::class]),
+                              $container->get('openWeatherMapApiKey')
+                );
+            }
+        ];
+    }
+
+    // ...
+}
+```
+
+La configuration peut être stockée dans le conteneur!
+---
 # Bonus
 ## Créer des alias
 
@@ -1054,42 +1087,6 @@ class UniversalWeatherApiServiceProvider implements ServiceProvider
 
 ---
 
-# Bonus
-## Gestion de la configuration
-
-```php
-class UniversalWeatherApiServiceProvider implements ServiceProvider
-{
-    public function getServices()
-    {
-        return [
-            WeatherApi::class => function(ContainerInterface $container) {
-                return new WeatherApi($container->get(HttpClient::class]),
-                              $container->get(LoggerInterface::class]),
-                              $container->get(CacheItemPoolInterface::class]),
-                              $container->get('openWeatherMapApiKey')
-                );
-            }
-        ];
-    }
-
-    // ...
-}
-```
-
-La configuration peut être stockée dans le conteneur!
----
-Conclusion
-
-TODO: schéma avec mon paquet, un paquet service-provider, et les frameworks qui tapent dedans.
-
-Discours:
-
-- pour les auteurs de paquets, c'est mieux: un seul paquet à écrire, donc une plus grande proportion de la population atteignable
-- pour l'innovation, c'est mieux: un nouvel auteur de framework peut avoir plein de paquets à sa disposition directement et lutter sur le fond et non sur l'acquis
-- pour les auteurs de gros frameworks, c'est mieux aussi: plus de soucis de migration d'une version à l'autre
-
----
 class: center, middle, inverse
 
 # Timeline
@@ -1112,6 +1109,16 @@ class: center, middle, inverse
 - Déjà utilisable mais possibles *breaking changes*
 - *Need help*
 - Discussions pour une PSR début 2017
+
+???
+
+On a besoin d'aide autour de container-interop/service-provider.
+
+Si vous êtes auteurs de paquets open-source, vous pouvez considérer écrire un service provider universel (attention, ça bouge), mais ça permet de recupérer des feedbacks.
+
+Egalement, vous pouvez tenter de créer des adaptateurs entre votre framework préferré et les service providers universels.
+
+Enfin, on prend tous les commentaires et toutes les critiques!
 
 ---
 class: middle, inverse
