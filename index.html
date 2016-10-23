@@ -1000,8 +1000,7 @@ Avantages:
 
 ---
 
-# Bonus
-## Gestion de la configuration
+# Gestion de la configuration
 
 ```php
 class UniversalWeatherApiServiceProvider implements ServiceProvider
@@ -1024,6 +1023,67 @@ class UniversalWeatherApiServiceProvider implements ServiceProvider
 ```
 
 La configuration peut être stockée dans le conteneur!
+
+---
+class: center, middle, inverse
+
+# Timeline
+
+---
+
+# container-interop/container-interop
+
+- Déjà utilisable
+- 2,4 millions de downloads
+
+# PSR-11
+
+- Officialisation de `container-interop/container-interop`
+- Vote d'ici la fin de l'année
+
+# container-interop/service-provider
+
+- .highlight2[**Alpha!**] => v0.3
+- Déjà utilisable mais possibles *breaking changes*
+- *Need help*
+- Discussions pour une PSR début 2017
+
+???
+
+On a besoin d'aide autour de container-interop/service-provider.
+
+Si vous êtes auteurs de paquets open-source, vous pouvez considérer écrire un service provider universel (attention, ça bouge), mais ça permet de recupérer des feedbacks.
+
+Egalement, vous pouvez tenter de créer des adaptateurs entre votre framework préferré et les service providers universels.
+
+Enfin, on prend tous les commentaires et toutes les critiques!
+
+---
+class: middle, inverse
+
+# .center[Questions?]
+
+<table style="margin-left: auto; margin-right: auto">
+  <tr>
+    <td style="text-align: right"><img src="images/twitter.png" style="height: 2.5vh" /></td>
+    <td>@david_negrier</td>
+  </tr>
+  <tr>
+    <td style="text-align: right"><img src="images/Octocat.png" style="height: 3vh" /></td>
+    <td>@moufmouf</td>
+  </tr>
+  <tr>
+    <td style="text-align: right"><img src="images/joindin.png" style="width: 4vw" /></td>
+    <td><a href="https://joind.in/19049">joind.in/19049</a></td>
+  </tr>
+  <tr>
+    <td style="text-align: right"><img src="images/tcm.png" style="width: 7vw" /></td>
+    <td>On recrute! <a href="https://www.thecodingmachine.com/jobs/">thecodingmachine.com/jobs</a></td>
+  </tr>
+</table>
+
+
+
 ---
 # Bonus
 ## Créer des alias
@@ -1086,72 +1146,6 @@ class UniversalWeatherApiServiceProvider implements ServiceProvider
     }
 }
 ```
-
----
-
-class: center, middle, inverse
-
-# Timeline
-
----
-
-# container-interop/container-interop
-
-- Déjà utilisable
-- 2,4 millions de downloads
-
-# PSR-11
-
-- Officialisation de `container-interop/container-interop`
-- Vote d'ici la fin de l'année
-
-# container-interop/service-provider
-
-- .highlight2[**Alpha!**] => v0.3
-- Déjà utilisable mais possibles *breaking changes*
-- *Need help*
-- Discussions pour une PSR début 2017
-
-???
-
-On a besoin d'aide autour de container-interop/service-provider.
-
-Si vous êtes auteurs de paquets open-source, vous pouvez considérer écrire un service provider universel (attention, ça bouge), mais ça permet de recupérer des feedbacks.
-
-Egalement, vous pouvez tenter de créer des adaptateurs entre votre framework préferré et les service providers universels.
-
-Enfin, on prend tous les commentaires et toutes les critiques!
-
----
-class: middle, inverse
-
-# .center[Questions?]
-
-<table style="margin-left: auto; margin-right: auto">
-  <tr>
-    <td style="text-align: right"><img src="images/twitter.png" style="height: 2.5vh" /></td>
-    <td>@david_negrier</td>
-  </tr>
-  <tr>
-    <td style="text-align: right"><img src="images/Octocat.png" style="height: 3vh" /></td>
-    <td>@moufmouf</td>
-  </tr>
-  <tr>
-    <td style="text-align: right"><img src="images/joindin.png" style="width: 4vw" /></td>
-    <td><a href="https://joind.in/19049">joind.in/19049</a></td>
-  </tr>
-  <tr>
-    <td style="text-align: right"><img src="images/tcm.png" style="width: 7vw" /></td>
-    <td>On recrute! <a href="https://www.thecodingmachine.com/jobs/">thecodingmachine.com/jobs</a></td>
-  </tr>
-</table>
-
-
-
-
----
-
-Tips: rechercher des implémentations: Packanalyst
 
 
 
