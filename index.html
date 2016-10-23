@@ -900,9 +900,9 @@ class UniversalWeatherApiServiceProvider implements ServiceProvider
     {
         return [
             WeatherApi::class => function(ContainerInterface $container) {
-                return new WeatherApi($container->get(HttpClient::class]),
-                              $container->get(LoggerInterface::class]),
-                              $container->get(CacheItemPoolInterface::class]),
+                return new WeatherApi($container->get(HttpClient::class),
+                              $container->get(LoggerInterface::class),
+                              $container->get(CacheItemPoolInterface::class),
                               $container->get('openWeatherMapApiKey')
                 );
             }
@@ -918,6 +918,8 @@ class UniversalWeatherApiServiceProvider implements ServiceProvider
 # Dans la pratique
 
 - Projet `container-interop/service-provider`
+
+- *beta*, ne pas utiliser en production
 
 - Consommateurs de l'interface (pour l'instant):
   - Symfony bridge
