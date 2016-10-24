@@ -4,9 +4,6 @@
     <title>Title</title>
     <meta charset="utf-8">
     <style>
-      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
-      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
-      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
 
       body { font-family: 'Droid Serif'; }
       h1, h2, h3 {
@@ -16,6 +13,7 @@
       .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
 
       .full-width img { width: 100%; }
+      .large-img img { width: 75%; }
 
       .highlight1 { color: #990099;font-size: bolder;  }
       .highlight2 { color: #CC0000;font-size: bolder;  }
@@ -33,6 +31,104 @@
       .inverse a {
         color: #7070ff;
       }
+
+      .remark-code-line-highlighted {
+          background-color: #664;
+      }
+      
+      .small {
+        font-size: 75%
+      }
+
+      /* latin-ext */
+      @font-face {
+        font-family: 'Yanone Kaffeesatz';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Yanone Kaffeesatz Regular'), local('YanoneKaffeesatz-Regular'), url(assets/YDAoLskQQ5MOAgvHUQCcLV83L2yn_om9bG0a6EHWBso.woff2) format('woff2');
+        unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: 'Yanone Kaffeesatz';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Yanone Kaffeesatz Regular'), local('YanoneKaffeesatz-Regular'), url(assets/YDAoLskQQ5MOAgvHUQCcLfGwxTS8d1Q9KiDNCMKLFUM.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+      }
+      /* latin */
+      @font-face {
+        font-family: 'Droid Serif';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Droid Serif'), local('DroidSerif'), url(assets/0AKsP294HTD-nvJgucYTaI4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+      }
+      /* latin */
+      @font-face {
+        font-family: 'Droid Serif';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Droid Serif Bold'), local('DroidSerif-Bold'), url(assets/QQt14e8dY39u-eYBZmppwYlIZu-HDpmDIZMigmsroc4.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+      }
+      /* latin */
+      @font-face {
+        font-family: 'Droid Serif';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Droid Serif Italic'), local('DroidSerif-Italic'), url(assets/cj2hUnSRBhwmSPr9kS5898u2Q0OS-KeTAWjgkS85mDg.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+      }
+      /* latin-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url(assets/ViZhet7Ak-LRXZMXzuAfkSYE0-AqJ3nfInTTiDXDjU4.woff2) format('woff2');
+        unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url(assets/ViZhet7Ak-LRXZMXzuAfkY4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+      }
+      /* latin-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Ubuntu Mono Bold'), local('UbuntuMono-Bold'), url(assets/ceqTZGKHipo8pJj4molytujkDdvhIIFj_YMdgqpnSB0.woff2) format('woff2');
+        unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Ubuntu Mono Bold'), local('UbuntuMono-Bold'), url(assets/ceqTZGKHipo8pJj4molytolIZu-HDpmDIZMigmsroc4.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+      }
+      /* latin-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Ubuntu Mono Italic'), local('UbuntuMono-Italic'), url(assets/KAKuHXAHZOeECOWAHsRKA0_0lycXMw8PhobHtu2Qgco.woff2) format('woff2');
+        unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Ubuntu Mono Italic'), local('UbuntuMono-Italic'), url(assets/KAKuHXAHZOeECOWAHsRKA8u2Q0OS-KeTAWjgkS85mDg.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+      }
+
     </style>
   </head>
   <body>
@@ -50,6 +146,8 @@ class: center, middle, inverse
 - Lead developer de <img alt="Mouf" src="images/mouf.png" style="height: 2vh">
 - Lead developer de <img alt="Mouf" src="images/packanalyst.png" style="height: 1.5vh"> **Packanalyst**
 - Co-editeur de container-interop et de la PSR-11
+
+.full-width[![](images/github_activity.png)]
 
 ---
 class: center, middle
@@ -134,7 +232,7 @@ class: center, middle
 
 ---
 
-background-image: url(https://media.giphy.com/media/XIqCQx02E1U9W/giphy.gif)
+background-image: url(images/kermit_keyboard.gif)
 background-position: center
 background-repeat: no-repeat
 background-size: contain
@@ -146,13 +244,13 @@ class: center, middle
 
 # Je vais le partager avec le monde entier!
 
-![Github](http://docs.whitesourcesoftware.com/download/attachments/17989744/github_logo.png?version=1&modificationDate=1463491374000)
+![Github](images/github_logo.png)
 
-![Packagist](https://samsonasik.files.wordpress.com/2012/05/packagist.png?w=328&h=64)
+![Packagist](images/packagist_logo.png)
 
 ---
 
-background-image: url(http://66.media.tumblr.com/3b22c7b2799f4adadbe377af7e8e7443/tumblr_npf7bzwSvA1s2wio8o1_500.gif)
+background-image: url(images/kermit_happy.gif)
 background-position: center
 background-repeat: no-repeat
 background-size: contain
@@ -271,7 +369,7 @@ class: center, middle
 
 ---
 
-background-image: url(https://media.giphy.com/media/K2R831kr4IXte/giphy.gif)
+background-image: url(images/kermit_groumpf.gif)
 background-position: center
 background-repeat: no-repeat
 background-size: contain
@@ -312,7 +410,7 @@ class: center, middle
 
 ---
 
-background-image: url(https://media.giphy.com/media/K2R831kr4IXte/giphy.gif)
+background-image: url(images/kermit_groumpf.gif)
 background-position: center
 background-repeat: no-repeat
 background-size: contain
@@ -337,7 +435,7 @@ class: center, middle
 
 # Il nous faudrait une boite noire...
 
-.full-width[![](images/blackbox.png)]
+.large-img[![](images/blackbox.png)]
 
 ---
 class: center, middle
@@ -406,7 +504,7 @@ interface LoggerInterface
 ---
 # Il nous faut des interfaces!
 
-.full-width[![](images/interfaces.png)]
+.large-img[![](images/interfaces.png)]
 
 
 ---
@@ -474,7 +572,7 @@ class WeatherApi
 
 ---
 
-background-image: url(http://i.imgur.com/7034zbg.gif)
+background-image: url(images/kermit_yay.gif)
 background-position: center
 background-repeat: no-repeat
 background-size: contain
@@ -593,67 +691,9 @@ class: center, middle
 ## C'est .highlight1[votre responsabilité] d'être gentil avec l'utilisateur et de lui fournir un module.
 
 ---
-## l33t/weatherapi
+## l33t/weatherapi + modules associés
 
-Vous allez donc devoir écrire:
-
-- un module Symfony: `l33t/weatherapi-bundle`
-
----
-## l33t/weatherapi
-
-Vous allez donc devoir écrire:
-
-- un module Symfony: `l33t/weatherapi-bundle`
-- un module Zend: `l33t/weatherapi-zf2-module`
-
----
-
-## l33t/weatherapi
-
-Vous allez donc devoir écrire:
-
-- un module Symfony: `l33t/weatherapi-bundle`
-- un module Zend: `l33t/weatherapi-zf2-module`
-- un module Laravel: `l33t/weatherapi-laravel-module`
-
----
-## l33t/weatherapi
-
-Vous allez donc devoir écrire:
-
-- un module Symfony: `l33t/weatherapi-bundle`
-- un module Zend: `l33t/weatherapi-zf2-module`
-- un module Laravel: `l33t/weatherapi-laravel-module`
-- un module Drupal: `l33t/weatherapi-drupal-module`
-
----
-
-## l33t/weatherapi
-
-Vous allez donc devoir écrire:
-
-- un module Symfony: `l33t/weatherapi-bundle`
-- un module Zend: `l33t/weatherapi-zf2-module`
-- un module Laravel: `l33t/weatherapi-laravel-module`
-- un module Drupal: `l33t/weatherapi-drupal-module`
-- un module Wordpress: `l33t/weatherapi-wordpress-module`
-
----
-## l33t/weatherapi
-
-Vous allez donc devoir écrire:
-
-- un module Symfony: `l33t/weatherapi-bundle`
-- un module Zend: `l33t/weatherapi-zf2-module`
-- un module Laravel: `l33t/weatherapi-laravel-module`
-- un module Drupal: `l33t/weatherapi-drupal-module`
-- un module Wordpress: `l33t/weatherapi-wordpress-module`
-- un module Yii: `l33t/weatherapi-yii-module`
-- un module Silex: `l33t/weatherapi-silex-module`
-- un module Mouf: `l33t/weatherapi-mouf-installer`
-- un module Joomla: `l33t/weatherapi-joomla-module`
-- un module Magento: `l33t/weatherapi-magento-module`
+.large-img[![](images/all_modules1.png)]
 
 ---
 
@@ -677,7 +717,7 @@ background-size: contain
 ---
 class: center, middle
 
-<img src="images/packagist.png" style="height: 47vh" />
+<img src="images/packagist.png" style="height: 45vh" />
 ---
 class: center, middle, inverse
 
@@ -686,17 +726,12 @@ class: center, middle, inverse
 ---
 # Maintenant
 
-.full-width[![](images/all_modules1.png)]
-
----
-# Maintenant
-
-.full-width[![](images/all_modules2.png)]
+.large-img[![](images/all_modules2.png)]
 
 ---
 # Idéalement
 
-.full-width[![](images/all_modules3.png)]
+.large-img[![](images/all_modules3.png)]
 
 ---
 class: center, middle
@@ -957,16 +992,16 @@ class UniversalWeatherApiServiceProvider implements ServiceProvider
         ];
     }
 
-    public function getServiceExtensions()
-    {
-        return [
-            Twig_Environment::class => function(ContainerInterface $container,
-                                                Twig_Environment $twig) {
-                $twig->addExtension($container->get(MyTwigExtension::class));
-                return $twig;
-            }
-        ];
-    }
+*    public function getServiceExtensions()
+*    {
+*        return [
+*            Twig_Environment::class => function(ContainerInterface $container,
+*                                                Twig_Environment $twig) {
+*                $twig->addExtension($container->get(MyTwigExtension::class));
+*                return $twig;
+*            }
+*        ];
+*    }
 }
 ```
 
@@ -1012,7 +1047,7 @@ class UniversalWeatherApiServiceProvider implements ServiceProvider
                 return new WeatherApi($container->get(HttpClient::class]),
                               $container->get(LoggerInterface::class]),
                               $container->get(CacheItemPoolInterface::class]),
-                              $container->get('openWeatherMapApiKey')
+*                              $container->get('openWeatherMapApiKey')
                 );
             }
         ];
@@ -1043,7 +1078,7 @@ class: center, middle, inverse
 
 # container-interop/service-provider
 
-- .highlight2[**Alpha!**] => v0.3
+- .highlight2[**Beta!**] => v0.3
 - Déjà utilisable mais possibles *breaking changes*
 - *Need help*
 - Discussions pour une PSR début 2017
@@ -1082,6 +1117,11 @@ class: middle, inverse
   </tr>
 </table>
 
+.center.small[Liens:  
+[container-interop/service-provider](https://github.com/container-interop/service-provider/)  
+[PSR-11](https://github.com/php-fig/fig-standards/blob/master/proposed/container.md)  
+[container-interop](https://github.com/container-interop/container-interop/)  
+[thecodingmachine/weatherapi](https://github.com/thecodingmachine/weatherapi/)]
 
 
 ---
@@ -1297,10 +1337,18 @@ Alors on a cherché.
 ---
 </textarea>
   -->
-    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    <script src="assets/remark-latest.min.js">
     </script>
     <script>
-      var slideshow = remark.create();
+      var slideshow = remark.create({
+  // Set the slideshow display ratio
+  // Default: '4:3'
+  // Alternatives: '16:9', ...
+  ratio: '16:9',
+
+  highlightLines: true,
+  highlightStyle: "dark"
+});
     </script>
   </body>
 </html>
