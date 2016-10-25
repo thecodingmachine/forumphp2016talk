@@ -14,6 +14,15 @@
 
       .full-width img { width: 100%; }
       .large-img img { width: 75%; }
+      span.large-img {
+        display: block;
+        text-align: center;
+      }
+      .w10 img { width: 10%; }
+      .w15 img { width: 15%; }
+      .w20 img { width: 20%; }
+      .w30 img { width: 30%; }
+      .w40 img { width: 40%; }
 
       .highlight1 { color: #990099;font-size: bolder;  }
       .highlight2 { color: #CC0000;font-size: bolder;  }
@@ -29,7 +38,11 @@
         line-height: 0.8em;
       }
       .inverse a {
-        color: #7070ff;
+        color: #A0A0ff;
+      }
+      
+      .inverse {
+        font-size: 150%
       }
 
       .remark-code-line-highlighted {
@@ -139,15 +152,22 @@ class: center, middle, inverse
 # Ecrire du code PHP *framework-agnostic* : aujourd'hui et demain
 
 ---
+class: center, middle
+
+# *Framework-agnostic*
+# =
+# .highlight1[Indépendant du framework]
+
+---
 
 # David Négrier
 
-- Co-fondateur et directeur technique de <img alt="TheCodingMachine" src="images/tcm-black.png" style="height: 1.5vh">
-- Lead developer de <img alt="Mouf" src="images/mouf.png" style="height: 2vh">
-- Lead developer de <img alt="Mouf" src="images/packanalyst.png" style="height: 1.5vh"> **Packanalyst**
-- Co-editeur de container-interop et de la PSR-11
+- Co-fondateur et directeur technique de <img alt="TheCodingMachine" src="images/tcm-black.png" style="width: 15%">
+- Lead developer de <img alt="Mouf" src="images/mouf.png" style="width: 5%">
+- Lead developer de <img alt="Mouf" src="images/packanalyst.png" style="width: 2%"> **Packanalyst**
+- Co-editeur de container-interop et de la **PSR-11**
 
-.full-width[![](images/github_activity.png)]
+.large-img[![](images/github_activity.png)]
 
 ---
 class: center, middle
@@ -164,7 +184,7 @@ Vous allez me dire, David, ça à l'air compliqué ton truc là, je peux pas fai
 ---
 class: center, middle
 
-# L'ennemi: la fragmentation
+# L'ennemi: .highlight2[la fragmentation]
 
 ???
 
@@ -302,15 +322,23 @@ class Utils
 
 ## friendsofjs/leftpad
 
-<p style="margin-top:15vh">&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
-.center.middle[Ce paquet est déjà *framework agnostic*, thanks to **Composer** and **PSR-4**.]
+.center.middle[Ce paquet est déjà *framework agnostic*, thanks to **Composer** and **PSR-4** (autoload).]
 
 ---
 
 ## friendsofjs/leftpad
 
-<p style="margin-top:15vh">&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
 .center.middle[Mais pas très utile...]
 
@@ -410,7 +438,7 @@ class: center, middle
 
 ---
 
-background-image: url(images/kermit_groumpf.gif)
+background-image: url(images/kermit_think.gif)
 background-position: center
 background-repeat: no-repeat
 background-size: contain
@@ -677,7 +705,7 @@ Dans la vraie vie, chaque .highlight1[service] est en fait configuré et récup�
 
 class: center, middle
 
-Dans la vraie vie, l'utilisateur est .highlight1[fénéant] et n'aime pas configurer le conteneur d'injection de dépendance.
+Dans la vraie vie, l'utilisateur est .highlight1[fainéant] et n'aime pas configurer le conteneur d'injection de dépendance.
 
 ---
 
@@ -717,7 +745,7 @@ background-size: contain
 ---
 class: center, middle
 
-<img src="images/packagist.png" style="height: 45vh" />
+<img src="images/packagist.png" style="width: 55%" />
 ---
 class: center, middle, inverse
 
@@ -792,7 +820,7 @@ C'est pour ça que certains containers, comme Symfony sont "compilés" et sont c
 ---
 # Mouf
 
-.full-width[![](images/mouf_screenshot.png)]
+.full-width[![](images/mouf.gif)]
 
 ???
 D'autres containers sont carrément graphiques (Mouf) et n'ont pas de méthode set non plus...
@@ -801,7 +829,7 @@ Le truc important, c'est que la manière de configurer un container est ce qui f
 ---
 class: center, middle
 
-Alors on a cherché...
+## Alors on a cherché...
 
 ???
 
@@ -907,15 +935,15 @@ interface ContainerInterface
 
 - C'est une interface commune pour les conteneurs d'injection de dépendance.
 - C'est l'aboutissement du projet `container-interop/container-interop`.
-- Née à la suite du forum PHP 2013 (merci l'AFUP)
+- Née à la suite du .highlight3[**Forum PHP 2013**] (merci l'AFUP)
 - Auteurs:
   - Matthieu Napoli
   - David Négrier
   - et des dizaines de participants
-- 2.400.000 downloads
-- 387 paquets dépendants
-- Pierre angulaire de Zend-expressive et Slim3
-- Triviale à implémenter pour tous les containers
+- **2.400.000** downloads
+- **387** paquets dépendants
+- Pierre angulaire de .highlight1[**Zend-expressive**] et .highlight1[**Slim3**]
+- .highlight2[**Triviale**] à implémenter pour tous les containers
 
 ???
 Donc pour la partie récupérer les dépendances, j'ai une solution!
@@ -1094,25 +1122,77 @@ Egalement, vous pouvez tenter de créer des adaptateurs entre votre framework pr
 Enfin, on prend tous les commentaires et toutes les critiques!
 
 ---
+class: center, middle, inverse
+
+# Conclusion
+
+---
+
+class: center
+
+# .left[Créer des paquets *framework-agnostic*]
+
+## Evitez de .highlight2[dépendre d'une implémentation] (si possible)
+
+---
+count: false
+class: center
+
+# .left[Créer des paquets *framework-agnostic*]
+
+## Evitez de .highlight2[dépendre d'une implémentation] (si possible)
+
+## Soyez conscient des initiatives pour .highlight3[créer des interfaces]
+(cf Cartographie, PHP-FIG...)
+
+---
+count: false
+class: center
+
+# .left[Créer des paquets *framework-agnostic*]
+
+## Evitez de .highlight2[dépendre d'une implémentation] (si possible)
+
+## Soyez conscient des initiatives pour .highlight3[créer des interfaces]
+(cf Cartographie, PHP-FIG...)
+
+## Aujourd'hui: créez un .highlight1[module/bundle par framework]
+
+---
+count: false
+class: center
+
+# .left[Créer des paquets *framework-agnostic*]
+
+## Evitez de .highlight2[dépendre d'une implémentation] (si possible)
+
+## Soyez conscient des initiatives pour .highlight3[créer des interfaces]
+(cf Cartographie, PHP-FIG...)
+
+## Aujourd'hui: créez un .highlight1[module/bundle par framework]
+
+## Demain: utilisez des .highlight3[service providers universels]
+
+---
 class: middle, inverse
 
 # .center[Questions?]
 
 <table style="margin-left: auto; margin-right: auto">
   <tr>
-    <td style="text-align: right"><img src="images/twitter.png" style="height: 2.5vh" /></td>
-    <td>@david_negrier</td>
+    <td style="text-align: right; width:50%;"><img src="images/twitter.png" style="width: 5%" /></td>
+    <td style="width:50%;">@david_negrier</td>
   </tr>
   <tr>
-    <td style="text-align: right"><img src="images/Octocat.png" style="height: 3vh" /></td>
+    <td style="text-align: right"><img src="images/Octocat.png" style="width: 6%" /></td>
     <td>@moufmouf</td>
   </tr>
   <tr>
-    <td style="text-align: right"><img src="images/joindin.png" style="width: 4vw" /></td>
+    <td style="text-align: right"><img src="images/joindin.png" style="width: 20%" /></td>
     <td><a href="https://joind.in/19049">joind.in/19049</a></td>
   </tr>
   <tr>
-    <td style="text-align: right"><img src="images/tcm.png" style="width: 7vw" /></td>
+    <td style="text-align: right"><img src="images/tcm.png" style="width: 35%" /></td>
     <td>On recrute! <a href="https://www.thecodingmachine.com/jobs/">thecodingmachine.com/jobs</a></td>
   </tr>
 </table>
