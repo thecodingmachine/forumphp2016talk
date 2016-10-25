@@ -53,6 +53,10 @@
       .small {
         font-size: 75%
       }
+      
+      .remark-slide-content.big-text {
+        font-size: 26px;
+      }
 
       /* latin-ext */
       @font-face {
@@ -320,10 +324,9 @@ class Utils
    ```
 
 ---
-
+class: big-text
 ## friendsofjs/leftpad
 
-<p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
@@ -332,10 +335,9 @@ class Utils
 .center.middle[Ce paquet est déjà *framework agnostic*, thanks to **Composer** and **PSR-4** (autoload).]
 
 ---
-
+class: big-text
 ## friendsofjs/leftpad
 
-<p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
@@ -357,12 +359,12 @@ class: center, middle
 .full-width[![](images/weatherapi.png)]
 
 ---
-class: center, middle
+class: center, middle, big-text
 
 Ok, donc j'ai besoin d'un client HTTP pour faire une requête...
 
 ---
-class: center, middle
+class: center, middle, big-text
 
 - curl?
 
@@ -371,12 +373,12 @@ class: center, middle
 Curl? Mais la gestion des erreurs sous Curl est tellement galère...
 
 ---
-class: center, middle
+class: center, middle, big-text
 
 - Guzzle?
 
 ---
-class: center, middle
+class: center, middle, big-text
 
 - Guzzle 5?
 - Guzzle 6?
@@ -386,12 +388,12 @@ class: center, middle
 J'ai bien envie de prendre la dernière version mais j'ai ce projet qui utilise encore Guzzle 5 et je ne pourrais pas utiliser mon paquet dans ce projet sans migrer Guzzle...
 
 ---
-class: center, middle
+class: center, middle, big-text
 
 - Zend-HTTP?
 
 ---
-class: center, middle
+class: center, middle, big-text
 
 
 - React HTTP client?
@@ -404,12 +406,12 @@ background-repeat: no-repeat
 background-size: contain
 
 ---
-class: center, middle
+class: center, middle, big-text
 
 Et j'ai besoin d'une librairie pour les logs aussi!
 
 ---
-class: center, middle
+class: center, middle, big-text
 
 - `fopen`, `fwrite`?
 
@@ -418,22 +420,22 @@ class: center, middle
 Et si je veux loguer autre part que dans un fichier?
 
 ---
-class: center, middle
+class: center, middle, big-text
 
 - Monolog?
 
 ---
 
-class: center, middle
+class: center, middle, big-text
 - cakephp/log?
 
 ---
-class: center, middle
+class: center, middle, big-text
 
 - joomla/log?
 
 ---
-class: center, middle
+class: center, middle, big-text
 
 - vespula/log?
 
@@ -552,7 +554,7 @@ interface LoggerInterface
 ```
 
 ---
-class: center, middle
+class: center, middle, big-text
 
 Si je veux utiliser des interfaces, .highlight2[je ne suis pas responsable] de l'instantiation des objets.
 
@@ -663,7 +665,7 @@ class: center, middle
 
 ![](images/ohwait.png)
 
-# .highlight2[L'utilisateur!]
+# .highlight2[L'utilisateur du package!]
 
 ---
 
@@ -710,19 +712,19 @@ Qu'est ce que ce "glue code" contient?
 => de la configuration de conteneurs
 
 ---
-class: center, middle
+class: center, middle, big-text
 
 Dans la vraie vie, chaque .highlight1[service] est en fait configuré et récupéré depuis le .highlight1[conteneur d'injection de dépendance].
 
 ---
 
-class: center, middle
+class: center, middle, big-text
 
 Dans la vraie vie, l'utilisateur est .highlight1[fainéant] et n'aime pas configurer le conteneur d'injection de dépendance.
 
 ---
 
-class: center, middle
+class: center, middle, big-text
 
 Dans la vraie vie, l'utilisateur .highlight1[utilise un module tout fait] pour injecter les services dans le conteneur.
 
@@ -775,21 +777,21 @@ class: center, middle, inverse
 .large-img[![](images/all_modules3.png)]
 
 ---
-class: center, middle
+class: center, middle, big-text
 
 
 Pour arriver à avoir un module unique, il faudrait que ce module soit capable .highlight1[d'écrire dans les containers] de tous les frameworks existants...
 
 ---
 
-class: center, middle
+class: center, middle, big-text
 
 
 Mais tous les containers sont .highlight2[très différents]!
 
 ---
 
-class: center, middle
+class: center, middle, big-text
 
 
 Mais tous les containers sont .highlight2[**très très différents**]!
