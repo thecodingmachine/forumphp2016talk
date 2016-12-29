@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Writing PHP framework-agnostic code: today and tomorrow</title>
+    <meta charset="utf-8">
+    <style>
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+
+      .full-width img { width: 100%; }
+      .large-img img { width: 75%; }
+      .very-large-img img { width: 89%; }
+      span.large-img, span.very-large-img {
+        display: block;
+        text-align: center;
+      }
+      .w10 img { width: 10%; }
+      .w15 img { width: 15%; }
+      .w20 img { width: 20%; }
+      .w30 img { width: 30%; }
+      .w40 img { width: 40%; }
+
+      .highlight1 { color: #990099;font-size: bolder;  }
+      .highlight2 { color: #CC0000;font-size: bolder;  }
+      .highlight3 { color: #009900;font-size: bolder;  }
+
+      .inverse {
+        background: #272822;
+        color: #C7C8C2;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 0.8em;
+      }
+      .inverse a {
+        color: #A0A0ff;
+      }
+
+      .inverse {
+        font-size: 150%
+      }
+
+      .remark-code-line-highlighted {
+          background-color: #664;
+      }
+
+      .small {
+        font-size: 75%
+      }
+
+      .remark-slide-content.big-text {
+        font-size: 26px;
+      }
+
+      /* latin-ext */
+      @font-face {
+        font-family: 'Yanone Kaffeesatz';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Yanone Kaffeesatz Regular'), local('YanoneKaffeesatz-Regular'), url(assets/YDAoLskQQ5MOAgvHUQCcLV83L2yn_om9bG0a6EHWBso.woff2) format('woff2');
+        unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: 'Yanone Kaffeesatz';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Yanone Kaffeesatz Regular'), local('YanoneKaffeesatz-Regular'), url(assets/YDAoLskQQ5MOAgvHUQCcLfGwxTS8d1Q9KiDNCMKLFUM.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+      }
+      /* latin */
+      @font-face {
+        font-family: 'Droid Serif';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Droid Serif'), local('DroidSerif'), url(assets/0AKsP294HTD-nvJgucYTaI4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+      }
+      /* latin */
+      @font-face {
+        font-family: 'Droid Serif';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Droid Serif Bold'), local('DroidSerif-Bold'), url(assets/QQt14e8dY39u-eYBZmppwYlIZu-HDpmDIZMigmsroc4.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+      }
+      /* latin */
+      @font-face {
+        font-family: 'Droid Serif';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Droid Serif Italic'), local('DroidSerif-Italic'), url(assets/cj2hUnSRBhwmSPr9kS5898u2Q0OS-KeTAWjgkS85mDg.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+      }
+      /* latin-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url(assets/ViZhet7Ak-LRXZMXzuAfkSYE0-AqJ3nfInTTiDXDjU4.woff2) format('woff2');
+        unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url(assets/ViZhet7Ak-LRXZMXzuAfkY4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+      }
+      /* latin-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Ubuntu Mono Bold'), local('UbuntuMono-Bold'), url(assets/ceqTZGKHipo8pJj4molytujkDdvhIIFj_YMdgqpnSB0.woff2) format('woff2');
+        unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Ubuntu Mono Bold'), local('UbuntuMono-Bold'), url(assets/ceqTZGKHipo8pJj4molytolIZu-HDpmDIZMigmsroc4.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+      }
+      /* latin-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Ubuntu Mono Italic'), local('UbuntuMono-Italic'), url(assets/KAKuHXAHZOeECOWAHsRKA0_0lycXMw8PhobHtu2Qgco.woff2) format('woff2');
+        unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Ubuntu Mono Italic'), local('UbuntuMono-Italic'), url(assets/KAKuHXAHZOeECOWAHsRKA8u2Q0OS-KeTAWjgkS85mDg.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+      }
+
+    </style>
+  </head>
+  <body>
+<textarea id="source">
+
+
+class: center, middle, inverse
+# Writing PHP *framework-agnostic* code : today and tomorrow
+
+---
+class: center, middle
+
+# *Framework-agnostic*
+# =
+# .highlight1[Independent from the framework]
+
+---
+
+# David Négrier
+
+- <img alt="TheCodingMachine" src="images/tcm-black.png" style="width: 15%"> Co-founder and CTO
+- <img alt="Mouf" src="images/mouf.png" style="width: 5%"> Lead developer
+- <img alt="Mouf" src="images/packanalyst.png" style="width: 2%"> **Packanalyst** Lead developer
+- container-interop and **PSR-11** co-editor
+
+.large-img[![](images/github_activity.png)]
+
+---
+class: center, middle
+
+# *framework-agnostic* code...
+# What for?
+
+???
+
+In this talk, we will speak about framework-agnostic code, that is code that is independent from your framework.
+So the first question you might ask is what for?
+You're going to tell me: hey David, your stuff seems difficult here, I'd rather write a Symfony bundle.
+
+---
+class: center, middle
+
+# Your enemy: .highlight2[fragmentation]
+
+???
+
+We all have a common enemy: fragmentation.
+This fragmentation is a problem for framework authors, for package developers or even if you are a simple application developer.
+
+---
+class: middle
+
+## - I am an open-source package developer
+
+# .center[Fragmentation is .highlight2[my enemy]]
+
+???
+
+Let's say I'm developing a Symfony bundle... or a Wordpress module, or a Drupal plugin, or a Zend Framework module...
+Each time I do this, I become a Symfony developer, or a Wordpress developer...
+My PHP package looses a potential much wider audience: the audience of all PHP developpers.
+
+For an open-source package developers, fragmentation means a lesser audience for my code.
+
+
+---
+class: middle
+
+## - I am an open-source package developer
+## - I am a framework author
+
+# .center[Fragmentation is .highlight2[my enemy]]
+
+
+???
+
+Hey! Come on guys! I built this brand new framework, it rocks!
+Chances this will succeed? 0
+Because all the developers of the community are focused on building Symfony bundles or Wordpress modules.Parce que tous les développeurs de la communauté sont occupés à faire des bundles Symfony ou des modules Wordpress.
+Conclusion: that's less competition, so less innovation.
+
+And even for well established frameworks, this is harmful since they have to fight against themselves with each new major release (see Drupal 7 to Drupal 8 migration!)
+
+---
+class: middle
+
+## - I am an open-source package developer
+## - I am a framework author
+## - I am a developer and I use a framework
+
+# .center[Fragmentation is .highlight2[my enemy]]
+
+???
+
+Same problem. You cannot use a module from a competing framework. Furthermore, if your own code is too tied to the framework, will be hard to migrate.
+
+So all of us are concerned by the fragmentation of the ecosystem issues.
+
+In this talk, I'll focus on the first case, so I'll ask you to do as if you were a PHP open-source package developer.
+Out of curiosity, how many of you have a Github account that you used on an open-source account?
+
+---
+
+
+class: center, middle
+
+# Congratulations! You did it! You wrote your first PHP package!
+
+---
+
+background-image: url(images/kermit_keyboard.gif)
+background-position: center
+background-repeat: no-repeat
+background-size: contain
+
+
+---
+
+class: center, middle
+
+# I'm gonna share it with the whole wide world!
+
+![Github](images/github_logo.png)
+
+![Packagist](images/packagist_logo.png)
+
+---
+
+background-image: url(images/kermit_happy.gif)
+background-position: center
+background-repeat: no-repeat
+background-size: contain
+
+
+---
+
+class: center, middle
+
+# 2 possible cases
+
+---
+
+class: center, middle
+
+# Case 1: my package is dead simple
+
+---
+
+## friendsofjs/leftpad
+
+```php
+namespace So\Useful;
+
+class Utils
+{
+    public static function leftPad($string, $length, $filler = ' ')
+    {
+        return str_pad($string, $length, $filler, STR_PAD_LEFT);
+    }
+}
+```
+
+---
+
+## friendsofjs/leftpad
+
+1. I put my package in any project
+   ```
+   composer require friendsofjs/leftpad
+   ```
+2. I use it... success!
+   ```php
+   echo Utils::leftPad('42%', 4);
+   // " 42%"
+   ```
+
+---
+class: big-text
+## friendsofjs/leftpad
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+.center.middle[This package is already *framework agnostic*, thanks to **Composer** and **PSR-4** (autoload).]
+
+---
+class: big-text
+## friendsofjs/leftpad
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+.center.middle[But not very useful...]
+
+---
+
+class: center, middle
+
+# Case 2: My package is more complex
+
+---
+
+
+## l33t/weatherapi
+
+.full-width[![](images/weatherapi.png)]
+
+---
+class: center, middle, big-text
+
+Ok, so I need an HTTP client to perform this request...
+
+---
+class: center, middle, big-text
+
+- curl?
+
+???
+
+Curl? But management of errors is sooooo hard... (no exceptions...)
+
+---
+class: center, middle, big-text
+
+- Guzzle?
+
+---
+class: center, middle, big-text
+
+- Guzzle 5?
+- Guzzle 6?
+
+???
+
+I'd like to use the latest version of Guzzle, but I have this old project that uses Guzzle 5 and I won't be able to use my new package in my old project without first migrating Guzzle... damn!
+
+---
+class: center, middle, big-text
+
+- Zend-HTTP?
+
+---
+class: center, middle, big-text
+
+
+- React HTTP client?
+
+---
+
+background-image: url(images/kermit_groumpf.gif)
+background-position: center
+background-repeat: no-repeat
+background-size: contain
+
+---
+class: center, middle, big-text
+
+And I need a library to manage logs too!
+
+---
+class: center, middle, big-text
+
+- `fopen`, `fwrite`?
+
+???
+
+But what if I want to log to something else than a file?
+
+---
+class: center, middle, big-text
+
+- Monolog?
+
+---
+
+class: center, middle, big-text
+- cakephp/log?
+
+---
+class: center, middle, big-text
+
+- joomla/log?
+
+---
+class: center, middle, big-text
+
+- vespula/log?
+
+---
+
+background-image: url(images/kermit_think.gif)
+background-position: center
+background-repeat: no-repeat
+background-size: contain
+
+---
+
+
+class: center, middle
+
+# Stop!
+
+
+---
+class: center, middle
+
+## You should avoid depending on a particular .highlight2[implementation].
+
+## Whenever it is possible, prefer an .highlight1[abstraction].
+
+
+---
+
+# We would need a black box...
+
+.large-img[![](images/blackbox.png)]
+
+---
+class: center, middle
+
+## In OOP:
+
+# .highlight1[Abstraction]
+# =
+# Black box
+# =
+# .highlight3[Interface]
+
+---
+
+# HTTPlug
+
+```php
+interface HttpClient
+{
+    /**
+     * Sends a PSR-7 request.
+     *
+     * @param RequestInterface $request
+     *
+     * @return ResponseInterface
+     *
+     * @throws \Http\Client\Exception If an error happens during processing the request.
+     * @throws \Exception             If processing the request is impossible (eg. bad configuration).
+     */
+    public function sendRequest(RequestInterface $request);
+}
+```
+
+---
+
+# PSR-3
+
+```php
+interface LoggerInterface
+{
+    /**
+     * Logs with an arbitrary level.
+     *
+     * @param mixed  $level
+     * @param string $message
+     * @param array  $context
+     *
+     * @return void
+     */
+    public function log($level, $message, array $context = array());
+
+    public function emergency($message, array $context = array());
+    public function alert($message, array $context = array());
+    public function critical($message, array $context = array());
+    public function error($message, array $context = array());
+    public function warning($message, array $context = array());
+    public function notice($message, array $context = array());
+    public function info($message, array $context = array());
+    public function debug($message, array $context = array());
+
+}
+```
+
+
+
+---
+# We need interfaces!
+
+.large-img[![](images/interfaces.png)]
+
+
+---
+# l33t/weatherapi
+
+**composer.json**
+```json
+{
+    "name": "l33t/weatherapi",
+    "require": {
+        "php-http/client-implementation": "^1.0",
+        "psr/log": "^1.0",
+        "psr/cache": "^1.0"
+    }
+}
+```
+
+---
+class: center, middle, big-text
+
+If I want to use interfaces, .highlight2[I'm not in charge] of creating object instances.
+
+???
+
+Remember: if my component sees a black box, it means that my component does not know who it is talking to. It cannot be responsible for instantiating a logger or a cache service, or a HTTP client.
+
+But if I don't have an implementation, how do I write my package?
+---
+
+```php
+namespace L33t\WeatherApi;
+
+use Http\Client\HttpClient;
+use Psr\Cache\CacheItemPoolInterface;
+use Psr\Log\LoggerInterface;
+
+class WeatherApi
+{
+    private $httpClient;
+    private $logger;
+    private $cache;
+    private $apiKey;
+
+    public function __construct(HttpClient $httpClient,
+                                LoggerInterface $logger,
+                                CacheItemPoolInterface $cache,
+                                string $apiKey)
+    {
+        $this->httpClient = $httpClient;
+        $this->logger = $logger;
+        $this->cache = $cache;
+        $this->apiKey = $apiKey;
+    }
+
+    public function getWeather(string $countryCode, string $cityName) : Weather
+    {
+        // Do stuff...
+    }
+}
+```
+
+### Pro-tip: this is what we call "dependency injection"
+
+
+---
+
+background-image: url(images/kermit_yay.gif)
+background-position: center
+background-repeat: no-repeat
+background-size: contain
+
+---
+class: center, middle, inverse
+
+# Interlude: interoperability cartography
+
+---
+
+# Typical components in a framework
+
+.very-large-img[![](images/framework_structure.png)]
+
+---
+
+# Typical components in a framework
+
+.very-large-img[![](images/framework_structure_2.png)]
+
+---
+
+# Typical components in a framework
+
+.very-large-img[![](images/framework_structure_3.png)]
+
+---
+
+# Typical components in a framework
+
+.very-large-img[![](images/framework_structure_4.png)]
+
+???
+
+Mettre l'accent sur les manques, notamment l'absence d'interface pour le rendering => si j'ai un composant dans une page web que je veux intégrer dans un template, je ne sais pas comment faire.
+
+---
+class: center, middle, inverse
+
+# End of interlude: back to L33t/WeatherAPI
+
+---
+
+class: center, middle
+
+## .highlight2[I'm not in charge] of creating object instances.
+
+
+---
+class: center, middle
+
+### If .highlight2[I'm not in charge] of creating object instances...
+
+# .highlight1[who is in charge???]
+
+---
+class: center, middle
+
+![](images/ohwait.png)
+
+# .highlight2[The user of my package!]
+
+---
+
+So I moved a part of the complexity of the code **to the user** of my class.
+
+
+**composer.json**
+```json
+{
+  "require": {
+    "l33t/weatherapi": "^1.0",
+    "guzzlehttp/guzzle": "^6.0",
+    "php-http/guzzle6-adapter": "^1.1",
+    "monolog/monolog": "^1.9",
+    "tedivm/stash": "^0.14"
+  }
+}
+```
+
+**file.php** (the *glue code*)
+```php
+$guzzle = new GuzzleClient([]);
+$httplugAdapter = new GuzzleAdapter($guzzle);
+
+$logger = new Logger('my_logger');
+$logger->pushHandler(new StreamHandler(__DIR__.'/my_app.log', Logger::DEBUG));
+
+$driver = new Stash\FileSystem();
+$cache = new Stash\Pool($driver);
+
+$weatherApi = new WeatherApi($httplugAdapter, $logger, $cache);
+$weather = $weatherApi->getWeather('fr', 'Paris');
+```
+
+???
+
+Now, it is the responsibility of the user to know what packages he must import.
+
+In particular, it's his responsibility to create the instances of the objects (and hence to know how to use each library he chooses).
+
+So what does this glue code contains?
+
+=> adapter classes (supposed to disappear with PSRs)
+=> container configuration
+
+---
+class: center, middle, big-text
+
+In real life, each .highlight1[service] is in fact configured in and fetched from the .highlight1[dependency injection container].
+
+---
+
+class: center, middle, big-text
+
+In real life, the user is .highlight1[lazy] and does not like to configure the DI container.
+
+---
+
+class: center, middle, big-text
+
+In real life, the user .highlight1[uses a ready to use module] to inject services in the container.
+
+---
+class: center, middle
+
+## It is .highlight1[your responsibility] to be nice to your users and to offer him/her a module.
+
+---
+## l33t/weatherapi + associated modules
+
+.large-img[![](images/all_modules1.png)]
+
+---
+
+class: center, middle
+
+## It is .highlight2[your responsibility] to know all those frameworks!
+
+???
+=> for big packages => it is the framework author responsibility to write the glue code (cf Doctrine)
+=> most of the time, it is the responsibility of the author of the package.
+
+---
+
+background-image: url(images/kermit_water.gif)
+background-position: center
+background-repeat: no-repeat
+background-size: contain
+
+---
+class: center, middle
+
+<img src="images/packagist.png" style="width: 55%" />
+---
+class: center, middle, inverse
+
+# And tomorrow?
+
+---
+# Now
+
+.large-img[![](images/all_modules2.png)]
+
+---
+# Ideally
+
+.large-img[![](images/all_modules3.png)]
+
+---
+class: center, middle, big-text
+
+We would need our unique module to be able to able to .highlight1[write in any container] of any existing framework...
+
+---
+
+class: center, middle, big-text
+
+But all containers are .highlight2[very different]!
+
+---
+
+class: center, middle, big-text
+
+But all containers are .highlight2[very very different]!
+
+---
+# Pimple (used in Silex)
+
+```php
+$container[WeatherApi::class] = function(Pimple $container) {
+    return new WeatherApi($container[HttpClient::class],
+                          $container[LoggerInterface::class],
+                          $container[CacheItemPoolInterface::class],
+                          $container['openWeatherMapApiKey']
+                          );
+};
+```
+
+???
+
+Ok, so this is easy with Pimple. It looks like a setter, so we could simply put a "set" method in all containers?
+
+Alas no! There are plenty of cases where writing a setter is not possible (like all compiled containers)
+
+And if you have to call "set" for each service in your app, the more services you have, the more you app will slow down => an app with 1000+ services will be very slow if I have to call "set" a thousand times (even if I don't instantiate services on each call!)
+
+
+---
+# Symfony
+
+**services.yml**
+```yml
+services:
+    weatherApi:
+        class:        L33t\WeatherApi\WeatherApi
+        arguments:    [@httpClient, @logger, @cache]
+```
+
+???
+That's why some containers, like Symfony are "compiled" and configurable via a config file.
+
+---
+# Mouf
+
+.full-width[![](images/mouf.gif)]
+
+???
+Other containers have other set of features. Mouf, for instance, has a UI (and no "set" method either)
+
+The important part is that the way a container is configured is what makes it different from other containers. So we should definitely not standardize this part, otherwise, we are killing what makes each container "special".
+
+---
+class: center, middle
+
+## So we searched...
+
+???
+
+So we searched...
+
+I'm not going to dive in the details, but we first looked for a way to make containers run side-by-side. That way, rather than looking how to add services in a container, you could simply add a new container with the services you want.
+It does work ok, but there are issues with packages that extend services declared in other packages.
+
+Then, we looked for a unified file format to describe seervices (like services.yml, but standardized). But there is the problem of the choice of the format. JSON? (easy but no comments). YML? XML? (powerful, but complex). Even Symfony does not make a choice in the file format by allowing several formats.
+
+And having all projects to agree is clearly impossible.
+
+XXXX
+
+So we said... ok, let's work on interfaces that represent the content of the configuration file (this way, there is no need to choose a format). This idea also kind of works. But it's really hard to describe all possible ways a service can be instantiated. It requires a lot of code and interfaces are complex.
+
+So we kept searching, and one day, Matthieu Napoli (the guy that worked with me on PSR-11) got this idea:
+
+
+
+---
+class: center, middle, inverse
+
+# Universal service provider
+
+
+---
+
+# *service-providers*
+
+A service provider is a class in charge of putting services into a container.
+
+**In *Laravel***
+
+```php
+class LaravelWeatherApiServiceProvider extends ServiceProvider
+{
+    public function register()
+    {
+        $this->app->singleton(WeatherApi::class, function ($app) {
+            return new WeatherApi($app->make(HttpClient::class),
+                                  $app->make(LoggerInterface::class),
+                                  $app->make(CacheItemPoolInterface::class),
+                                  config('openWeatherMapApiKey')
+                                  );
+        });
+    }
+}
+```
+
+---
+# *service-providers*
+
+A service provider is a class in charge of putting services into a container.
+
+**In *Silex***
+
+```php
+class SilexWeatherApiServiceProvider implements ServiceProviderInterface
+{
+    public function register(Container $app)
+    {
+        $app[WeatherApi::class] = $app->share(function() use ($app) {
+            return new WeatherApi($app[HttpClient::class],
+                                  $app[LoggerInterface::class],
+                                  $app[CacheItemPoolInterface::class],
+                                  $app['openWeatherMapApiKey']
+                                  );
+        });
+    }
+}
+```
+
+???
+
+Do you see the problem?
+
+Those service providers are reading from the container to fetch their dependencies.
+And those 2 services providers are writing in the container.
+
+So we need 2 things... one function to read from the container (get) and one function to put things in the container (set).
+For the get functiton, it's easy, we have container-interop and PSR-11.
+
+---
+
+# Fetching dependencies? PSR-11!
+
+```php
+interface ContainerInterface
+{
+    public function get($id);
+    public function has($id);
+}
+```
+
+---
+background-image: url(images/unicorns.gif)
+background-position: center
+background-repeat: no-repeat
+background-size: contain
+
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+# .center.highlight3[PHP-FIG: frameworks playing together]
+
+---
+background-image: url(images/war_zone.jpg)
+background-position: center
+background-repeat: no-repeat
+background-size: contain
+
+# .center.highlight2[PHP-FIG, early 2016]
+
+
+---
+
+# PSR-11, *what's that*?
+
+- An interface for dependency injection containers.
+- The final result of the `container-interop/container-interop` project.
+- Started in 2013 on the .highlight2[**FIG mailing list**] and at .highlight3[**Forum PHP Paris 2013**]
+- Authors:
+  - Matthieu Napoli
+  - David Négrier
+  - and dozens of other participants
+- **2.400.000** downloads
+- **387** paquets dépendants
+- Corner stone of .highlight1[**Zend-expressive**] and .highlight1[**Slim3**]
+- Absolutely .highlight2[**trivial**] to implement in any container
+
+???
+So in order to fetch dependencies from a container, we have an existing solugion!
+Now for the part on how to "set" dependencies, it's way harder.
+But couldn't we skip this? Couldn't we find another way to do it?
+
+---
+background-image: url(images/unicorn_party.png)
+background-position: center
+background-repeat: no-repeat
+background-size: contain
+
+# .center.highlight1[PSR-11, in REVIEW!]
+
+
+---
+
+
+# Proposal
+
+Return an *array* of *factories* (i.e. *callables*), indexed by service identifier.
+
+```php
+class UniversalWeatherApiServiceProvider implements ServiceProvider
+{
+    public function getServices()
+    {
+        return [
+            WeatherApi::class => function(ContainerInterface $container) {
+                return new WeatherApi($container->get(HttpClient::class),
+                              $container->get(LoggerInterface::class),
+                              $container->get(CacheItemPoolInterface::class),
+                              $container->get('openWeatherMapApiKey')
+                );
+            }
+        ];
+    }
+
+    // ...
+}
+```
+
+---
+
+# In practice
+
+- Project `container-interop/service-provider`
+
+- *beta*, do not use in production
+
+- Existing consumers (for now):
+  - Symfony bridge
+  - Laravel bridge
+  - Drupal 8 bridge
+  - Simplex (Pimple 3 fork)
+  - Yaco (simple PSR-11 compiled container)
+
+
+---
+# In practice
+
+.full-width[![](images/all_modules4.png)]
+
+---
+
+class: center, middle, inverse
+# Demo
+
+
+---
+# Extending services
+
+.large-img[![](images/extension_twig.png)]
+
+.center[How can my `Twig_Environment` service know about my `MyTwigExtension`?]
+
+---
+
+# Extending services
+
+A *getServiceExtensions* method can be used to extend services.
+
+```php
+class UniversalWeatherApiServiceProvider implements ServiceProvider
+{
+    public function getServices()
+    {
+        return [
+            MyTwigExtension::class => function(ContainerInterface $container) {
+                return new MyTwigExtension();
+            }
+        ];
+    }
+
+*    public function getServiceExtensions()
+*    {
+*        return [
+*            Twig_Environment::class => function(ContainerInterface $container,
+*                                                Twig_Environment $twig) {
+*                $twig->addExtension($container->get(MyTwigExtension::class));
+*                return $twig;
+*            }
+*        ];
+*    }
+}
+```
+
+---
+
+# About service names
+
+.full-width[![](images/naming.png)]
+
+---
+
+# About service names
+
+.full-width[![](images/naming2.png)]
+
+???
+
+Another solution:
+
+- The name of the service should match the *Fully Qualified Class Name*
+- "Main" implemetation should be aliased to the interface name.
+
+So:
+
+- *logger* => `Monolog\Logger`
+- Alias `Monolog\Logger` to `Psr\Log\LoggerInterface`
+
+Pros:
+
+- Allows compatibility with containers that can do *autowiring*
+
+---
+
+# Configuration management
+
+```php
+class UniversalWeatherApiServiceProvider implements ServiceProvider
+{
+    public function getServices()
+    {
+        return [
+            WeatherApi::class => function(ContainerInterface $container) {
+                return new WeatherApi($container->get(HttpClient::class]),
+                              $container->get(LoggerInterface::class]),
+                              $container->get(CacheItemPoolInterface::class]),
+*                              $container->get('openWeatherMapApiKey')
+                );
+            }
+        ];
+    }
+
+    // ...
+}
+```
+
+Configuration can be stored in the container!
+
+---
+class: center, middle, inverse
+
+# Timeline
+
+---
+
+# container-interop/container-interop
+
+- Already usable
+- 2,4 million downloads
+
+# PSR-11
+
+- Standardized version of `container-interop/container-interop`
+- Vote in January
+
+# container-interop/service-provider
+
+- .highlight2[**Beta!**] => v0.3
+- Already usable but likely *breaking changes*
+- *Need help*
+- Discussions for a PSR in 2017
+
+???
+
+We need help working on container-interop/service-provider.
+
+If you are an author of an open-source package, you can consider writing a universal service provider (warning, moving target, but it's useful to get feedback).
+
+Also, you can work on adapters between your preferred framework and universal service providers.
+
+Finally, we are looking for all kind of comments!
+
+---
+class: center, middle, inverse
+
+# Conclusion
+
+---
+
+class: center
+
+# .left[Writing *framework-agnostic* packages]
+
+## Avoid .highlight2[depending on an implementation] (if possible)
+
+---
+count: false
+class: center
+
+# .left[Writing *framework-agnostic* packages]
+
+## Avoid .highlight2[depending on an implementation] (if possible)
+
+## Be aware of existing and incoming .highlight3[interfaces]
+(see Cartography, PHP-FIG...)
+
+---
+count: false
+class: center
+
+# .left[Writing *framework-agnostic* packages]
+
+## Avoid .highlight2[depending on an implementation] (if possible)
+
+## Be aware of existing and incoming .highlight3[interfaces]
+(see Cartography, PHP-FIG...)
+
+## Today: write a .highlight1[module/bundle for each framework]
+
+---
+count: false
+class: center
+
+# .left[Writing *framework-agnostic* packages]
+
+## Avoid .highlight2[depending on an implementation] (if possible)
+
+## Be aware of existing and incoming .highlight3[interfaces]
+(see Cartography, PHP-FIG...)
+
+## Today: write a .highlight1[module/bundle for each framework]
+
+## Tomorrow: use .highlight3[universal service providers]
+
+---
+class: middle, inverse
+
+# .center[Questions?]
+
+<table style="margin-left: auto; margin-right: auto">
+  <tr>
+    <td style="text-align: right; width:50%;"><img src="images/twitter.png" style="width: 5%" /></td>
+    <td style="width:50%;">@david_negrier</td>
+  </tr>
+  <tr>
+    <td style="text-align: right"><img src="images/Octocat.png" style="width: 6%" /></td>
+    <td>@moufmouf</td>
+  </tr>
+  <tr>
+    <td style="text-align: right"><img src="images/joindin.png" style="width: 20%" /></td>
+    <td><a href="https://joind.in/19049">joind.in/19049</a></td>
+  </tr>
+  <tr>
+    <td style="text-align: right"><img src="images/tcm.png" style="width: 35%" /></td>
+    <td>We hire! <a href="https://www.thecodingmachine.com/jobs/">thecodingmachine.com/jobs</a></td>
+  </tr>
+</table>
+
+.center.small[Links:
+[container-interop/service-provider](https://github.com/container-interop/service-provider/)
+[PSR-11](https://github.com/php-fig/fig-standards/blob/master/proposed/container.md)
+[container-interop](https://github.com/container-interop/container-interop/)
+[thecodingmachine/weatherapi](https://github.com/thecodingmachine/weatherapi/)
+[demo code](https://github.com/thecodingmachine/forumphp2016demo)]
+
+
+---
+# Bonus
+## Creating aliases
+
+```php
+class MyServiceProvider implements ServiceProvider
+{
+    public function getServices()
+    {
+        return [
+            LoggerInterface::class => function(ContainerInterface $container) {
+                return $container->get(Monolog\Logger::class);
+            }
+        ];
+    }
+}
+```
+
+---
+
+# Bonus
+## Using *invokable objects*
+
+```php
+class MyServiceProvider implements ServiceProvider
+{
+    public function getServices()
+    {
+        return [
+            // Alias is a class implementing __invoke
+            LoggerInterface::class => new Alias(Monolog\Logger::class)
+        ];
+    }
+}
+```
+
+---
+
+# Bonus
+## Performances
+
+Prefer *public static* methods for compiled containers.
+
+```php
+class UniversalWeatherApiServiceProvider implements ServiceProvider
+{
+    public function getServices()
+    {
+        return [
+            WeatherApi::class => [self::class, 'createWeatherApi']
+        ];
+    }
+
+    public static function createWeatherApi(ContainerInterface $container) {
+        return new WeatherApi($container->get(HttpClient::class]),
+                      $container->get(LoggerInterface::class]),
+                      $container->get(CacheItemPoolInterface::class]),
+                      $container->get('openWeatherMapApiKey')
+        );
+    }
+}
+```
+
+
+
+    </textarea>
+
+<!--
+<textarea>
+# OLD SLIDES
+
+
+---
+
+class: center, middle
+
+2 raisons d'être optimiste:
+
+- PSR-11
+- container-interop/service-provider
+
+---
+
+
+# La PSR-11, qu'est-ce que c'est?
+
+- C'est une interface commune pour les conteneurs d'injection de dépendance.
+- C'est l'aboutissement du projet `container-interop/container-interop`.
+- Née à la suite du forum PHP 2013 (merci l'AFUP)
+- Auteurs:
+  - Matthieu Napoli
+  - David Négrier
+  - et des dizaines de participants
+- 2.400.000 downloads
+- 387 paquets dépendants
+- Pierre angulaire de Zend-expressive et Slim3
+
+---
+
+# La PSR-11, qu'est-ce que c'est?
+
+```php
+interface ContainerInterface
+{
+    public function get($id);
+    public function has($id);
+}
+```
+
+---
+# A quoi ça sert?
+
+.full-width[![](images/usage_1.png)]
+
+---
+# A quoi ça sert?
+
+.full-width[![](images/usage_2.png)]
+
+???
+C'est le cas de Slim3
+
+---
+class: center, middle
+
+Ok, mais c'est quoi le rapport?
+
+![](images/right.gif)
+
+???
+
+Je veux être capable de **mettre des choses dans le container**, pas d'extraire des choses...
+
+---
+class: center, middle, inverse
+
+# Solution 1: PSR-11 + *delegate-lookup*
+
+---
+background-image: url(images/delegate1.png)
+background-position: center
+background-repeat: no-repeat
+background-size: contain
+
+## Multiplions les containers!
+
+???
+
+Et si chaque paquet venait avec son propre container?
+Comme les containers partagent la même interface, on peut les chaîner entre eux (exactement comme les middlewares PSR-7)
+
+Par contre, ça pose un problème. Dans mon schéma, c'est le container de WheatherApi qui contient les dépendances (cache, log, httpclient).
+Dans la vraie vie, ces dépendances seront plutôt déjà configurées dans le container de l'application!
+
+---
+background-image: url(images/delegate2.png)
+background-position: center
+background-repeat: no-repeat
+background-size: contain
+
+???
+
+
+
+---
+background-image: url(images/delegate3.png)
+background-position: center
+background-repeat: no-repeat
+background-size: contain
+
+
+---
+class: middle
+
+## Avantages:
+
+- Chaque paquet peut choisir son propre container
+
+## Est-ce utilisé?
+
+Oui! C'est la base de *Zend-Expressive*.
+
+
+---
+class: middle
+
+## Inconvénients:
+
+- Performances (pas d'impact constaté en conditions réélles)
+- Impossible .highlight2[**d'étendre une définition**]
+
+---
+background-image: url(images/extension.png)
+background-position: center
+background-repeat: no-repeat
+background-size: contain
+
+
+## Etendre une définition
+
+???
+
+Donc on a vraiment besoin de trouver un moyen d'étendre ces définitions.
+
+Alors on a cherché.
+
+- Un format de fichier universel? => oui mais quel format? JSON? XML? autre chose?
+- Une interface définissant les objets stockés dans un container (un peu meta)
+- Et puis, Matthieu a eu cette idée:
+
+---
+</textarea>
+  -->
+    <script src="assets/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create({
+  // Set the slideshow display ratio
+  // Default: '4:3'
+  // Alternatives: '16:9', ...
+  ratio: '16:9',
+
+  highlightLines: true,
+  highlightStyle: "dark"
+});
+    </script>
+  </body>
+</html>
